@@ -38,4 +38,21 @@ class EmployeesApplicationTests {
 		employeeRepository.save(employee1);
 	}
 
+	@Test
+	public void addEmployeesAndProjects(){
+		Department department1 = new Department("Brain Eating");
+		departmentRepository.save(department1);
+
+		Employee employee1 = new Employee("Bob","Smith","1A",department1);
+		employeeRepository.save(employee1);
+
+		Project project1 = new Project("I hope this test passes", 34);
+		projectRepository.save(project1);
+
+		project1.addEmployee(employee1);
+		projectRepository.save(project1);
+
+
+	}
+
 }
