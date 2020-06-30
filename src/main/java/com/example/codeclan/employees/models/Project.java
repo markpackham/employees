@@ -1,15 +1,35 @@
 package com.example.codeclan.employees.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "projects")
 public class Project {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "days")
     private int days;
+    @ManyToMany
+    @JoinTable(
+            name = "employees_projects",
+            joinColumns = { @JoinColumn(
+                    name = "project_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn(
+                    name = "employee_id",
+                    nullable = false,
+                    updatable = false)
+            })
     private List<Employee> employees;
 
-    public Project(String name, int days, Employee employee) {
+    public Project(String name, int days) {
         this.name = name;
         this.days = days;
         this.employees = new ArrayList<>();
@@ -49,5 +69,9 @@ public class Project {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
     }
 }
