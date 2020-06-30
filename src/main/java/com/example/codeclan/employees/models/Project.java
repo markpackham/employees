@@ -1,5 +1,7 @@
 package com.example.codeclan.employees.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ public class Project {
     private String name;
     @Column(name = "days")
     private int days;
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "employees_projects",

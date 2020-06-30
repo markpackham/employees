@@ -1,5 +1,7 @@
 package com.example.codeclan.employees.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class Employee {
     @Column(name="employee_number")
     private String employeeNumber;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "employees_projects",
@@ -36,11 +39,10 @@ public class Employee {
     )
     private List<Project> projects;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="department_id", nullable = false)
     private Department department;
-
-
 
     public Employee(String firstname, String lastname, String employeeNumber, Department department) {
         this.firstname = firstname;

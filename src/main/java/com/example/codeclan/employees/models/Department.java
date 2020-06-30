@@ -1,5 +1,6 @@
 package com.example.codeclan.employees.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -14,8 +15,8 @@ public class Department {
     private Long id;
     @Column(name = "name")
     private String name;
-    @JsonIgnoreProperties({"employee"})
-    @OneToMany(mappedBy = "department")
+    @JsonIgnore
+    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public Department(String name) {
