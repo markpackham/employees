@@ -9,12 +9,13 @@ import java.util.List;
 @Entity
 @Table(name = "departments")
 public class Department {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;
     @JsonIgnoreProperties({"employee"})
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
     public Department(String name) {
